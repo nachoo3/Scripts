@@ -1,0 +1,34 @@
+# Python Script that will generate a random password
+# Includes numbers, letters, and the specified special characters
+# Made by Yasser Al Rashidi
+
+import secrets
+import string
+
+# You can customize the special characters here
+SPECIAL = "#$%^!@"
+
+def generate_password(length=12):
+    if length < 3:
+        raise ValueError("Length must be at least 3 to include one letter, one digit, and one special character.")
+
+    alphabet = string.ascii_letters + string.digits + SPECIAL
+
+    # Ensure at least one letter, one digit, and one special character
+    password_chars = [
+        secrets.choice(string.ascii_letters),
+        secrets.choice(string.digits),
+        secrets.choice(SPECIAL),
+    ]
+
+    # Fill the rest with random choices from the full alphabet
+    password_chars += [secrets.choice(alphabet) for _ in range(length - 4)]
+
+    # Shuffle to avoid predictable order
+    rng = secrets.SystemRandom()
+    rng.shuffle(password_chars)
+
+    return ''.join(password_chars)
+
+if __name__ == "__main__":
+    print(generate_password(12))
