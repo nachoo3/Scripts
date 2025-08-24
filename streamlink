@@ -1,0 +1,4 @@
+mport streamlink
+streams = streamlink.streams('')#here just add the channel link to get the quality links 
+erstrm = streams["best"].multivariant.uri
+print(erstrm)
